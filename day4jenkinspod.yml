@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: day4silampod11
+    x: silamjenkins
+  name: day4silampod11
+  namespace: silambarasan
+spec:
+  containers:
+  - image: silamdevopstraining/devopsweb2:v1
+    name: day4silampod11
+    ports:
+     - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: day4silamsvc
+  name: day4silamsvc
+  namespace: silambarasan
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+   x: silamjenkins #same as pod label
+  type: NodePort
+status:
+  loadBalancer: {}
